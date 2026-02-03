@@ -9,7 +9,7 @@ Aplicación web de agenda colaborativa desarrollada sin frameworks.
 
 - Alumno/a 1:  Beatriz
 - Alumno/a 2:  José Manuel Ruiz Sojo (Chema)
-- Alumno/a 3:  
+- Alumno/a 3:  Alfonso Daniel Perucho Domínguez
 
 ---
 
