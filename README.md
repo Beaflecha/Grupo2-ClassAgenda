@@ -31,6 +31,8 @@ El proyecto integra contenidos de Programación, Bases de Datos, Sistemas Inform
 - Principios SOLID
 
 ### Base de datos
+## Explicación del modelo de datos
+- El modelo de datos de ClassAgenda está diseñado para gestionar eventos y tareas personales o compartidas entre usuarios. Cada usuario puede crear sus propios recursos y compartirlos con otros mediante un sistema de permisos. Las tablas EVENT_SHARES y TASK_SHARES permiten controlar quién tiene acceso a qué y con qué permisos.
 - SQL Server
 
 ### Cliente
