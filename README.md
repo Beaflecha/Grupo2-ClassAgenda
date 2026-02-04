@@ -31,8 +31,7 @@ El proyecto integra contenidos de Programación, Bases de Datos, Sistemas Inform
 - Principios SOLID
 
 ### Base de datos
-## Explicación del modelo de datos
-- El modelo de datos de ClassAgenda está diseñado para gestionar eventos y tareas personales o compartidas entre usuarios. Cada usuario puede crear sus propios recursos y compartirlos con otros mediante un sistema de permisos. Las tablas EVENT_SHARES y TASK_SHARES permiten controlar quién tiene acceso a qué y con qué permisos.
+
 - SQL Server
 
 ### Cliente
@@ -90,6 +89,36 @@ Ejemplo:
 - Esquema relacional  
 - Diagrama E-R  
 - Scripts SQL  
+
+---
+
+## 📘 Modelo de Datos — ClassAgenda (Sprint 0)
+
+Descripción general:
+
+El modelo de datos de ClassAgenda permite gestionar eventos y tareas personales o compartidas entre usuarios. Cada usuario puede crear sus propios recursos y compartirlos con otros mediante un sistema de permisos.
+
+Las tablas EVENT_SHARES y TASK_SHARES controlan qué usuario tiene acceso a qué recurso y con qué nivel de permiso.
+
+Tablas del modelo:
+
+- USERS:	Almacena los usuarios registrados (nombre, email, fecha de creación).
+
+- EVENTS:	Eventos creados por los usuarios (título, descripción, fechas, tipo).
+
+- TASKS:	Tareas personales (título, descripción, fecha límite, estado, prioridad).
+
+- EVENT_SHARES:	Compartición de eventos entre usuarios con permisos.
+
+- TASK_SHARES:	Compartición de tareas entre usuarios con permisos.
+  
+Relaciones principales:
+
+- Un usuario puede crear múltiples eventos y tareas (1:N).
+
+- Un evento o tarea puede compartirse con varios usuarios mediante las tablas de shares (1:N).
+
+- Un usuario puede recibir múltiples recursos compartidos(1:N).
 
 ---
 
