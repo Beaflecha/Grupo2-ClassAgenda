@@ -61,7 +61,7 @@ X-User-Id: <id_del_usuario>
 
 ## 🧱 Arquitectura del proyecto
 
-> /api
+/api
     Controladores REST. Reciben las peticiones HTTP, validan datos
     y llaman a los casos de uso de la capa application.
 
@@ -92,6 +92,7 @@ X-User-Id: <id_del_usuario>
     Documentación del proyecto: decisiones técnicas, endpoints, pruebas,
     evidencias, configuración de la máquina virtual y cualquier material adicional.
 
+```
 /api
   /presentation
   /application
@@ -100,6 +101,7 @@ X-User-Id: <id_del_usuario>
 /client
 /database
 /docs
+```
 
 ## 🗄️ Base de datos
 
