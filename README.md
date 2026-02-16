@@ -175,7 +175,7 @@ TASK_SHARES
 - Diagrama E-R
 - Scripts SQL  
   * [01_schema_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/01_schema.sql)
-  * [02_seed_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/01_schema.sql)
+  * [02_seed_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/02_seed.sql)
 ---
 
 ## 📘 Modelo de Datos
