@@ -58,7 +58,6 @@ X-User-Id: <id_del_usuario>
 
 ## 🧱 Arquitectura del proyecto
 
-## Arquitectura del proyecto
 
 | Capa               | Descripción |
 |--------------------|-------------|
@@ -92,61 +91,20 @@ X-User-Id: <id_del_usuario>
   - TASK_SHARES
   - EVENT_SHARES
 
-### Esquema relacional
-USERS
-  * id INT - PRIMARY KEY, IDENTITY
-  * name VARCHAR(80) - NOT NULL
-  * email VARCHAR(255) - UNIQUE, NOT NULL
-  * created_at DATETIME - DEFAULT GETDATE()
+## Esquema relacional
 
-EVENTS
-  * id INT -PRIMARY KEY, IDENTITY
-  * owner_user_id INT - FOREIGN KEY →  USERS(id)
-  * title VARCHAR(120) - NOT NULL
-  * description VARCHAR(1000)
-  * start_at DATETIME - NOT NULL
-  * end_at DATETIME - NOT NULL
-  * event_type VARCHAR(12) - NOT NULL
-  * created-at DATETIME -DEFAULT GETDATE()
-  CONSTRAINT
-  * FK(owner_user_id) → USERS(id)
+| Tabla            | Columnas                                                                                                   | Descripción |
+|------------------|-------------------------------------------------------------------------------------------------------------|-------------|
+| **USERS**        | id (PK, IDENTITY)<br>name VARCHAR(80) NOT NULL<br>email VARCHAR(255) UNIQUE NOT NULL<br>created_at DATETIME DEFAULT GETDATE() | Información de los usuarios registrados. |
+| **EVENTS**       | id (PK, IDENTITY)<br>owner_user_id (FK → USERS.id)<br>title VARCHAR(120) NOT NULL<br>description VARCHAR(1000)<br>start_at DATETIME NOT NULL<br>end_at DATETIME NOT NULL<br>event_type VARCHAR(12) NOT NULL<br>created_at DATETIME DEFAULT GETDATE() | Eventos creados por los usuarios. |
+| **TASKS**        | id (PK, IDENTITY)<br>owner_user_id (FK → USERS.id)<br>title VARCHAR(120) NOT NULL<br>description VARCHAR(1000)<br>due_date DATETIME<br>status VARCHAR(10)<br>priority VARCHAR(6)<br>created_at DATETIME DEFAULT GETDATE() | Tareas creadas por los usuarios. |
+| **EVENT_SHARES** | event_id (FK → EVENTS.id)<br>shared_with_user_id (FK → USERS.id)<br>permission VARCHAR(10)<br>shared_at DATETIME DEFAULT GETDATE()<br>PRIMARY KEY (event_id, shared_with_user_id) | Compartición de eventos entre usuarios. |
+| **TASK_SHARES**  | task_id (FK → TASKS.id)<br>shared_with_user_id (FK → USERS.id)<br>permission VARCHAR(10)<br>shared_at DATETIME DEFAULT GETDATE()<br>PRIMARY KEY (task_id, shared_with_user_id) | Compartición de tareas entre usuarios. |
 
-TASKS
-  * id INT - PRIMARY KEY, IDENTITY
-  * owner_user_id INT - FOREIGN KEY → USERS(id)
-  * title VARCHAR(120) - NOT NULL
-  * description VARCHAR(1000)
-  * due_date DATETIME
-  * status VARCHAR(10)
-  * priority VARCHAR(6)
-  * created_at DATETIME - DEFAULT GETDATE()
-  CONSTRAINT
-  *FK(owner_user_id) → USERS(id)
-
-EVENT_SHARES
-  * event_id INT - FOREIGN KEY → EVENTS(id)
-  * shared_with_user_id INT - FOREIGN KEY → USERS(id)
-  * permission VARCHAR(10)
-  * shared_at DATETIME - DEFAULT GETDATE()
-  CONSTRAINT
-  * PRIMARY KEY (event_id, shared_with_useer_id)
-  * FK(event_id) → EVENTS(id)
-  * FK(shared_with_user_id) → USERS(id)
-
-TASK_SHARES
-  * task_id INT -FOREIGN KEY → TASKS(id)
-  * shared_with_user_id INT -FOREIGN KEY → USERS(id)
-  * permission VARCHAR(10)
-  * shared_at DATETIME - DEFAULT GETDATE()
-  CONSTRAINT
-  * PRIMARY KEY (task_id, shared_with_user_id)
-  * FK(task_id) → TASKS(id)
-  * FK(shared_with_user_id) → USERS(id)
-
-### Diagrama E-R
+## Diagrama E-R
   ![Diagrama E-R](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/Diagrama%20E-R.png)
   
-### Scripts SQL  
+## Scripts SQL  
   * [01_schema_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/01_schema.sql)
   * [02_seed_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/02_seed.sql)
 ---
