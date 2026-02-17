@@ -170,10 +170,10 @@ TASK_SHARES
   * FK(task_id) → TASKS(id)
   * FK(shared_with_user_id) → USERS(id)
 
-
-📌 **Pendiente**:  
-- Diagrama E-R
-- Scripts SQL  
+### Diagrama E-R
+  ![Diagrama E-R] (https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/Diagrama%20E-R.png)
+  
+### Scripts SQL  
   * [01_schema_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/01_schema.sql)
   * [02_seed_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/02_seed.sql)
 ---
