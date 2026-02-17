@@ -1,7 +1,6 @@
-# Grupo2 - ClassAgenda
-
-Proyecto Intermodular de **1º DAM**  
-Aplicación web de agenda colaborativa desarrollada sin frameworks.
+<p align="center">
+  <img src="docs/Header.png" alt="ClassAgenda Header">
+</p>
 
 ---
 
