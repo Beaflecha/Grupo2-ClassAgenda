@@ -1,7 +1,6 @@
-# Grupo2 - ClassAgenda
-
-Proyecto Intermodular de **1º DAM**  
-Aplicación web de agenda colaborativa desarrollada sin frameworks.
+<p align="center">
+  <img src="docs/Header.png" alt="ClassAgenda Header">
+</p>
 
 ---
 
@@ -12,6 +11,24 @@ Aplicación web de agenda colaborativa desarrollada sin frameworks.
 - Alumno/a 3:  Alfonso Daniel Perucho Domínguez
 - Alumno/a 4: Bruno Regueira Ayuso
 - Alumno/a 5:
+
+---
+
+## 📑 Índice
+
+1. [Descripción del proyecto](#-descripción-del-proyecto)
+2. [Tecnologías utilizadas](#-tecnologías-utilizadas)
+3. [Restricciones](#-restricciones)
+4. [Arquitectura del proyecto](#-arquitectura-del-proyecto)
+5. [Base de datos](#-base-de-datos)
+6. [Modelo de datos](#-modelo-de-datos)
+7. [API REST](#-api-rest)
+8. [Cliente web](#-cliente-web)
+9. [Máquina virtual (Servidor)](#-máquina-virtual-servidor)
+10. [Pruebas](#-pruebas)
+11. [Metodología de trabajo](#-metodología-de-trabajo)
+12. [Estado del proyecto](#-estado-del-proyecto)
+13. [Notas finales](#-notas-finales)
 
 ---
 
@@ -59,44 +76,17 @@ X-User-Id: <id_del_usuario>
 
 ## 🧱 Arquitectura del proyecto
 
-/api  
 
-Controladores REST. Reciben las peticiones HTTP, validan datos
-y llaman a los casos de uso de la capa application.
-
-/presentation  
-
-Cliente web: HTML, CSS y JavaScript. Interfaz de usuario que consume la API.
-
-/application
-
-Casos de uso. Contienen la lógica de orquestación entre dominio e infraestructura.
-Aquí se aplican reglas de aplicación y se coordinan las operaciones.
-
-/domain
-
-Entidades, modelos y lógica de negocio pura. No depende de otras capas.
-Representa el corazón del sistema (Task, Event, User, Permission…).
-
-/infrastructure
-
-Implementaciones técnicas: repositorios JDBC, conexión a SQL Server,
-mapeadores y adaptadores. Aquí vive todo lo que depende de tecnología concreta.
-
-/client
-
-Código del cliente web si se separa de /presentation (opcional).
-Puede contener componentes, servicios o scripts organizados por módulos.
-
-/database
-
-Scripts SQL, diagramas E‑R, esquema relacional y datos de prueba.
-Incluye la definición de tablas y la estructura de la base de datos.
-
-/docs
-
-Documentación del proyecto: decisiones técnicas, endpoints, pruebas,
-evidencias, configuración de la máquina virtual y cualquier material adicional.
+| Capa               | Descripción |
+|--------------------|-------------|
+| **/api**           | Controladores REST. Reciben las peticiones HTTP, validan datos y llaman a los casos de uso de la capa *application*. |
+| **/presentation**  | Cliente web: HTML, CSS y JavaScript. Interfaz de usuario que consume la API. |
+| **/application**   | Casos de uso. Contienen la lógica de orquestación entre dominio e infraestructura. Aplican reglas de aplicación y coordinan operaciones. |
+| **/domain**        | Entidades, modelos y lógica de negocio pura. No depende de otras capas. Representa el corazón del sistema (Task, Event, User, Permission…). |
+| **/infrastructure**| Implementaciones técnicas: repositorios JDBC, conexión a SQL Server, mapeadores y adaptadores. Todo lo dependiente de tecnología concreta. |
+| **/client**        | Código del cliente web si se separa de *presentation*. Puede contener componentes, servicios o scripts organizados por módulos. |
+| **/database**      | Scripts SQL, diagramas E‑R, esquema relacional y datos de prueba. Incluye la definición de tablas y la estructura de la base de datos. |
+| **/docs**          | Documentación del proyecto: decisiones técnicas, endpoints, pruebas, evidencias, configuración de la máquina virtual y material adicional. |
 
 ```
 /api
@@ -119,11 +109,22 @@ evidencias, configuración de la máquina virtual y cualquier material adicional
   - TASK_SHARES
   - EVENT_SHARES
 
-📌 **Pendiente**:  
-- Esquema relacional  
-- Diagrama E-R  
-- Scripts SQL  
+## Esquema relacional
 
+| Tabla            | Columnas                                                                                                   | Descripción |
+|------------------|-------------------------------------------------------------------------------------------------------------|-------------|
+| **USERS**        | id (PK, IDENTITY)<br>name VARCHAR(80) NOT NULL<br>email VARCHAR(255) UNIQUE NOT NULL<br>created_at DATETIME DEFAULT GETDATE() | Información de los usuarios registrados. |
+| **EVENTS**       | id (PK, IDENTITY)<br>owner_user_id (FK → USERS.id)<br>title VARCHAR(120) NOT NULL<br>description VARCHAR(1000)<br>start_at DATETIME NOT NULL<br>end_at DATETIME NOT NULL<br>event_type VARCHAR(12) NOT NULL<br>created_at DATETIME DEFAULT GETDATE() | Eventos creados por los usuarios. |
+| **TASKS**        | id (PK, IDENTITY)<br>owner_user_id (FK → USERS.id)<br>title VARCHAR(120) NOT NULL<br>description VARCHAR(1000)<br>due_date DATETIME<br>status VARCHAR(10)<br>priority VARCHAR(6)<br>created_at DATETIME DEFAULT GETDATE() | Tareas creadas por los usuarios. |
+| **EVENT_SHARES** | event_id (FK → EVENTS.id)<br>shared_with_user_id (FK → USERS.id)<br>permission VARCHAR(10)<br>shared_at DATETIME DEFAULT GETDATE()<br>PRIMARY KEY (event_id, shared_with_user_id) | Compartición de eventos entre usuarios. |
+| **TASK_SHARES**  | task_id (FK → TASKS.id)<br>shared_with_user_id (FK → USERS.id)<br>permission VARCHAR(10)<br>shared_at DATETIME DEFAULT GETDATE()<br>PRIMARY KEY (task_id, shared_with_user_id) | Compartición de tareas entre usuarios. |
+
+## Diagrama E-R
+  ![Diagrama E-R](docs/Diagrama-E-R.png)
+  
+## Scripts SQL  
+  * [01_schema_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/01_schema.sql)
+  * [02_seed_sql](https://github.com/JaumeLloret/grupo2-ClassAgenda/blob/feature/database/database/02_seed.sql)
 ---
 
 ## 📘 Modelo de Datos
